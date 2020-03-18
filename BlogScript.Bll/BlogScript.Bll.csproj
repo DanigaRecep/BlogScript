@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concreate\" />
-    <Folder Include="ComplexTypes\" />
+    <ProjectReference Include="..\BlogScript.Core\BlogScript.Core.csproj" />
+    <ProjectReference Include="..\BlogScript.Entities\BlogScript.Entities.csproj" />
   </ItemGroup>
 
 </Project>
