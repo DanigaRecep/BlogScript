@@ -1,18 +1,21 @@
 ﻿using BlogScript.Bll.Abstract;
 using BlogScript.Bll.ComplexTypes;
 using BlogScript.Core.Abstract.Dal;
+using BlogScript.Dal.Abstract;
 using BlogScript.Entities.Concreate;
 
 namespace BlogScript.Bll.Concreate
 {
-    public class UserManager : EntityManager<User>, IUserService { public UserManager(IEntityRepository<User> repostory) : base(repostory) { } }
-    public class CommentManager : EntityManager<Comment>, ICommentService { public CommentManager(IEntityRepository<Comment> repostory) : base(repostory) { } }
+    public class UserManager : EntityManager<User>, IUserService { public UserManager(IUserDal repostory) : base(repostory) { } }
+    public class CategoryManager : EntityManager<Category>, ICategoryService { public CategoryManager(ICategoryDal repostory) : base(repostory) { } }
+    public class CommentManager : EntityManager<Comment>, ICommentService { public CommentManager(ICommentDal repostory) : base(repostory) { } }
     public class BlogManager : EntityManager<Blog>, IBlogService 
     {
-        public BlogManager(IEntityRepository<Blog> repostory) : base(repostory) 
+        public BlogManager(IBlogDal repostory) : base(repostory) 
         {
         }
         
+
 
         public override void Add(Blog entity)
         {

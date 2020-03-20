@@ -8,39 +8,29 @@ using Microsoft.Extensions.Logging;
 using BlogScript.MvcWebUi.Models;
 using BlogScript.Bll.Abstract;
 using BlogScript.Entities.Concreate;
+using BlogScript.MvcWebUi.Services;
 
 namespace BlogScript.MvcWebUi.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IUserService userService;
-        private readonly IBlogService blogService;
+        private readonly IUserSessionService userSessionService;
 
-        public HomeController(IUserService userService,IBlogService blogService)
+        public HomeController(IUserService userService,IUserSessionService userSessionService)
         {
             this.userService = userService;
-            this.blogService = blogService;
+            this.userSessionService = userSessionService;
         }
 
         public IActionResult Index()
         {
-
-            var users = userService.GetMany(x=>x.IsAdmin==false);
-            return View();
+            User loginUser = userSessionService.Get("LoginUser");
+            return View(loginUser);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(User user)
         {
-
-            Blog blog = new Blog()
-            {
-                Tags="A,B,v"
-            };
-            
-
-            blogService.Add(blog);
-
-            blogService.PointIncrementation(blog);
             return View();
         }
 

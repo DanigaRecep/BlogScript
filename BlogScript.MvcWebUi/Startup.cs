@@ -6,8 +6,10 @@ using BlogScript.Bll.Abstract;
 using BlogScript.Bll.Concreate;
 using BlogScript.Dal.Abstract;
 using BlogScript.Dal.Concreate.EntityFramework;
+using BlogScript.MvcWebUi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +42,25 @@ namespace BlogScript.MvcWebUi
             services.AddScoped<IBlogDal, EfBlogDal>();
 
 
+            services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<ICategoryDal, EfCategoryDal>();
+
+
+            services.AddSingleton<IUserSessionService, UserSessionService>();
+
+            services.AddSingleton<IUserCookieService, UserCookieService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
             services.AddControllersWithViews();
+
+            services.AddSession();
+            var mvcBuilder = services.AddControllersWithViews();
+#if DEBUG
+            mvcBuilder.AddRazorRuntimeCompilation();
+#endif
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,12 +79,18 @@ namespace BlogScript.MvcWebUi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

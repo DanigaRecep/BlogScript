@@ -15,6 +15,7 @@ namespace BlogScript.Dal.Concreate.EntityFramework.Contexts
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
     }

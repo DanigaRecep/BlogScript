@@ -8,6 +8,10 @@ namespace BlogScript.Entities.Concreate
 {
     public class Blog:EntityBase,IBlog
     {
+
+        public int Categoryid { get; set; }
+        public Category Category { get; set; }
+
         public int Userid { get; set; }
         public User User { get; set; }
 

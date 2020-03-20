@@ -8,6 +8,7 @@ namespace BlogScript.Bll.Abstract
 {
     public interface IUserService : IEntityRepository<User> { }
     public interface ICommentService : IEntityRepository<Comment> { }
+    public interface ICategoryService : IEntityRepository<Category> { }
     public interface IBlogService : IEntityRepository<Blog>
     {
         void PointIncrementation(Blog blog);

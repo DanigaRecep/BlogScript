@@ -1,8 +1,14 @@
-﻿@{
+﻿@model User
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model!=null)
+{
+    <img class="img-fluid" style="height:120px" src="~/UserImages/@Model.ProfilePhoto" asp-append-version="true" />
+    <h1>@Model.FirstName</h1>
+    <h1>@Model.LastName</h1>
+}
+
+<a href="@Url.Action(controller:"Login",action:"Index")">Giris Yap</a>

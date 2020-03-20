@@ -7,6 +7,10 @@ namespace BlogScript.Entities.Abstract
 {
     public interface IBlog
     {
+
+        int Categoryid { get; set; }
+        Category Category { get; set; }
+
         int Userid { get; set; }
         User User { get; set; }
 
