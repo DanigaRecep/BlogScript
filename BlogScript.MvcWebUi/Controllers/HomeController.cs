@@ -32,6 +32,7 @@ namespace BlogScript.MvcWebUi.Controllers
         public IActionResult Privacy(User user)
         {
             return View();
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
