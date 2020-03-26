@@ -14,22 +14,17 @@ namespace BlogScript.MvcWebUi.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService userService;
-        private readonly IUserSessionService userSessionService;
 
-        public HomeController(IUserService userService,IUserSessionService userSessionService)
+        public HomeController()
         {
-            this.userService = userService;
-            this.userSessionService = userSessionService;
         }
 
         public IActionResult Index()
         {
-            User loginUser = userSessionService.Get("LoginUser");
-            return View(loginUser);
+            return View();
         }
 
-        public IActionResult Privacy(User user)
+        public IActionResult Privacy()
         {
             return View();
             

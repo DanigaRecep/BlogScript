@@ -15,11 +15,15 @@ namespace BlogScript.Entities.Concreate
         public int Userid { get; set; }
         public User User { get; set; }
 
+        public string Title { get; set; }
+
         public int ViewCount { get; set; }
         public int Points { get; set; }
         public string Tags { get; set; }
 
         public string Content { get; set; }
+
+        public bool Privacy { get; set; }
 
 
         public ICollection<Comment>  Comments { get; set; }

@@ -53,9 +53,13 @@ namespace BlogScript.MvcWebUi
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
+
+
             services.AddControllersWithViews();
 
             services.AddSession();
+
+            services.AddDistributedMemoryCache();
             var mvcBuilder = services.AddControllersWithViews();
 #if DEBUG
             mvcBuilder.AddRazorRuntimeCompilation();

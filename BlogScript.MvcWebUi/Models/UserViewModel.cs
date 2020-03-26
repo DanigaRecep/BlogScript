@@ -10,12 +10,12 @@ namespace BlogScript.MvcWebUi.Models
     public class UserViewModel
     {
         [Display(Name = "Kullanıcı Adı: ")]
-        [Required]
+        [Required(ErrorMessage ="Lütfen Kullanıcı Adını Giriniz")]
         public string UserName { get; set; }
         [DataType(DataType.Password)]
         [Display(Name = "Parola: ")]
         [StringLength(20,MinimumLength =4)]
-        [Required]
+        [Required(ErrorMessage ="Lütfen Parolanızı giriniz")]
         public string Password { get; set; }
     }
 }

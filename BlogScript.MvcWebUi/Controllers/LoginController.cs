@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BlogScript.Bll.Abstract;
 using BlogScript.Bll.Helpers;
 using BlogScript.Entities.Concreate;
@@ -14,7 +11,6 @@ using static BlogScript.Bll.Helpers.RegexUtilities;
 using static BlogScript.Bll.Helpers.ToPasswordRepository;
 using static BlogScript.Bll.Helpers.PasswordCheck;
 using System.IO;
-using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.AspNetCore.Hosting;
 
 namespace BlogScript.MvcWebUi.Controllers
@@ -25,7 +21,7 @@ namespace BlogScript.MvcWebUi.Controllers
         private readonly IUserSessionService userSessionService;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public LoginController(IUserService userService, IUserSessionService userSessionService, IHostingEnvironment hostingEnvironment)
+        public LoginController(IUserService userService, IUserSessionService userSessionService,IHostingEnvironment hostingEnvironment)
         {
             this.userService = userService;
             this.userSessionService = userSessionService;
@@ -112,6 +108,14 @@ namespace BlogScript.MvcWebUi.Controllers
             ViewBag.RegisterAlertMassage = "Tüm bilgileri eksiksiz ve doğru biçimde girdiğinizden emin olunuz.";
 
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            User user = userSessionService.Get("LoginUser");
+            if (user!=null)
+                userSessionService.Set(null,"LoginUser");
+            return RedirectToAction("Index","Home",new { area=""});
         }
     }
 }

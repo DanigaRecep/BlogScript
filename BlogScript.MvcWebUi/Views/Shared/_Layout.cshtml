@@ -1,22 +1,35 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BlogScript.MvcWebUi</title>
+    <title>@ViewData["Title"] - Blog Script</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .ck-editor__editable {
+            min-height: 400px;
+        }
+
+        ul.ui-autocomplete {
+            z-index: 1100;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BlogScript.MvcWebUi</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blog Script</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-between">
+                    @await Html.PartialAsync("_UserDDM")
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -24,7 +37,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -42,6 +57,31 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.plugins.addExternal('SelectTemplate', 'lib/CKEditor/', 'plugin.js');
+        CKEDITOR.plugins.addExternal('SaveTemplate', 'lib/CKEditor/', 'plugin.js');
+        const config = {
+            filebrowserImageBrowseUrl: "/ImageBrowser",
+            filebrowserImageWindowWidth: 750,
+            filebrowserImageWindowHeight: 606,
+            filebrowserBrowseUrl: "/LinkBrowser",
+            filebrowserWindowWidth: 350,
+            filebrowserWindowHeight: 500,
+            entities_latin : false, 
+            extraPlugins: 'font',
+            allowedContent: 'ul li i(ion-android-checkmark-circle)'
+        };
+        config.contentsCss = ['/NewLayout/css/style.css',];
+        config.allowedContent = true;
+        config.extraAllowedContent = 'i(*)';
+        config.removeFormatAttributes = '';
+        const editor1 = document.getElementById("editor1");
+        if (editor1 != null) CKEDITOR.replace(editor1, config);
+        CKEDITOR.dtd.$removeEmpty.i = 0;
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

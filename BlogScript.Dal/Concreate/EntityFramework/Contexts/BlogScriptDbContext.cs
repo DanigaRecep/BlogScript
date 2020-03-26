@@ -10,7 +10,7 @@ namespace BlogScript.Dal.Concreate.EntityFramework.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BlogScript;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=DANIGA-PC\SQLEXPRESS;Initial Catalog=BlogScript;Integrated Security=True");
             base.OnConfiguring(optionsBuilder);
         }
 

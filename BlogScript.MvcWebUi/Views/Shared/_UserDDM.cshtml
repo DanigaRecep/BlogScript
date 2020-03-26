@@ -1,0 +1,33 @@
+﻿@inject IUserSessionService userSession
+@{
+    User LoginUser = userSession.Get("LoginUser");
+}
+    <div class="flex-grow-0 row">
+        @if (LoginUser != null)
+        {
+            <a class="btn btn-primary text-light text-center" asp-area="" asp-controller="Blog" asp-action="Create"><i class="fas fa-plus"></i></a>
+        }
+        <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i>
+                @if (LoginUser != null)
+                {
+                    @:@LoginUser.UserName
+                }
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                @if (LoginUser != null)
+                {
+                    <a class="dropdown-item" asp-area="" asp-controller="UserDetail" asp-action="Account">Hesabım</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">Bloglarım</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">Çıkış Yap</a>
+                }
+                else
+                {
+                    <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Index">Giriş Yap</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Register">Kayıt ol</a>
+                }
+
+            </div>
+        </div>
+    </div>

@@ -44,7 +44,13 @@ namespace BlogScript.Dal.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Privacy")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateDate")

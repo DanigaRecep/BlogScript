@@ -1,14 +1,20 @@
-﻿@model User
+﻿@inject IBlogService blogService
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@if (Model!=null)
-{
-    <img class="img-fluid" style="height:120px" src="~/UserImages/@Model.ProfilePhoto" asp-append-version="true" />
-    <h1>@Model.FirstName</h1>
-    <h1>@Model.LastName</h1>
-}
 
-<a href="@Url.Action(controller:"Login",action:"Index")">Giris Yap</a>
+@foreach (var item in blogService.GetMany(x => x.IsActive == true && x.Privacy == true))
+{
+    <h3>@item.Title</h3>
+    @Html.Raw(item.Content)
+    string[] tags = item.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries);
+    <div class="row">
+        @foreach (var tag in tags)
+        {
+            <p class="border border-primary m-1 bg-secondary text-light rounded">@tag</p>
+        }
+    </div>
+    <br />
+}
