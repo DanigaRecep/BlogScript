@@ -9,7 +9,7 @@ namespace BlogScript.Bll.ComplexTypes
 {
     public class EntityManager<T> : IEntityRepository<T> where T : EntityBase, new()
     {
-        public IEntityRepository<T> _repostory;
+        private IEntityRepository<T> _repostory;
         public EntityManager(IEntityRepository<T> repostory)
         {
             _repostory = repostory;
