@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BlogScript.MvcWebUi.ExtensionMethods;
 using BlogScript.Entities.Concreate;
+using BlogScript.Bll.Concreate;
 
 namespace BlogScript.MvcWebUi.Services
 {
@@ -14,9 +15,9 @@ namespace BlogScript.MvcWebUi.Services
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public User Get(string key)
+        public SessionUser Get(string key)
         {
-            return _httpContextAccessor.HttpContext.Request.Cookies.Get<User>(key);
+            return _httpContextAccessor.HttpContext.Request.Cookies.Get<SessionUser>(key);
         }
 
 

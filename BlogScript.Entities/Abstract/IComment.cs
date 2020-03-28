@@ -8,6 +8,7 @@ namespace BlogScript.Entities.Abstract
     public interface IComment
     {
         int? Userid { get; set; }
+        User User { get; set; }
 
 
         int Blogid { get; set; }

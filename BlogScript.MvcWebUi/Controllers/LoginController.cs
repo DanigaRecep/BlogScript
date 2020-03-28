@@ -12,6 +12,7 @@ using static BlogScript.Bll.Helpers.ToPasswordRepository;
 using static BlogScript.Bll.Helpers.PasswordCheck;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using BlogScript.Bll.Concreate;
 
 namespace BlogScript.MvcWebUi.Controllers
 {
@@ -45,7 +46,9 @@ namespace BlogScript.MvcWebUi.Controllers
                     foundUser.UpdateUserid = foundUser.id;
                     userService.Update(foundUser);
                     userService.Save();
-                    userSessionService.Set(foundUser, "LoginUser");
+                    SessionUser session = new SessionUser();
+                    foundUser.UserToSession(ref session);
+                    userSessionService.Set(session, "LoginUser");
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
@@ -112,7 +115,7 @@ namespace BlogScript.MvcWebUi.Controllers
 
         public IActionResult Logout()
         {
-            User user = userSessionService.Get("LoginUser");
+            SessionUser user = userSessionService.Get("LoginUser");
             if (user!=null)
                 userSessionService.Set(null,"LoginUser");
             return RedirectToAction("Index","Home",new { area=""});

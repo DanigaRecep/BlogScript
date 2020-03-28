@@ -1,6 +1,6 @@
 ﻿@inject IUserSessionService userSession
 @{
-    User LoginUser = userSession.Get("LoginUser");
+    SessionUser LoginUser = userSession.Get("LoginUser");
 }
 @{
     Layout = "./_Layout.cshtml";
@@ -23,17 +23,17 @@
     </div>
     <div class="col-9">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="UserDetail" asp-action="Account">Bloglarım</a>
+            <li class="nav-item ">
+                <a class="nav-link active" asp-area="" asp-controller="UserDetail" asp-action="Account">Bloglarım</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="UserDetail" asp-action="Account">Beğendiklerim</a>
+            <li class="nav-item ">
+                <a class="nav-link active" asp-area="" asp-controller="UserDetail" asp-action="Account">Beğendiklerim</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="UserDetail" asp-action="Account">Okuma Listesi</a>
+            <li class="nav-item ">
+                <a class="nav-link active" asp-area="" asp-controller="UserDetail" asp-action="Account">Okuma Listesi</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="UserDetail" asp-action="Account">Yorumlarım</a>
+            <li class="nav-item ">
+                <a class="nav-link active" asp-area="" asp-controller="UserDetail" asp-action="Account">Yorumlarım</a>
             </li>
         </ul>
         <div style="overflow-y:scroll;max-height:70vh">

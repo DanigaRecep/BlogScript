@@ -1,6 +1,6 @@
 ﻿@inject IUserSessionService userSession
 @{
-    User LoginUser = userSession.Get("LoginUser");
+    SessionUser LoginUser = userSession.Get("LoginUser");
 }
     <div class="flex-grow-0 row">
         @if (LoginUser != null)

@@ -6,8 +6,20 @@ using System.Text;
 
 namespace BlogScript.Entities.Concreate
 {
+    using Microsoft.EntityFrameworkCore.Infrastructure;
     public class User : EntityBase, IUser
     {
+        private readonly ILazyLoader lazyLoader;
+
+        public User()
+        {
+
+        }
+
+        public User(ILazyLoader lazyLoader)
+        {
+            this.lazyLoader = lazyLoader;
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -22,7 +34,20 @@ namespace BlogScript.Entities.Concreate
         /// </summary>
         public bool IsAdmin { get; set; } = false;
 
-        public ICollection<Blog> Blogs { get; set; }
+        private ICollection<Blog> _blogs;
+        public virtual ICollection<Blog> Blogs 
+        {
+            get => lazyLoader.Load(this, ref _blogs);
+            set => _blogs = value;
+        }
+
+
+        private ICollection<Comment> _comments;
+        public virtual ICollection<Comment> Comments
+        {
+            get => lazyLoader.Load(this, ref _comments);
+            set => _comments = value;
+        }
 
     }
 }

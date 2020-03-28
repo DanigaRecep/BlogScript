@@ -16,5 +16,6 @@ namespace BlogScript.Entities.Abstract
         bool IsAdmin { get; set; }
 
         ICollection<Blog> Blogs { get; set; }
+        ICollection<Comment> Comments { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlogScript.Bll.Abstract;
+using BlogScript.Bll.Concreate;
 using BlogScript.Entities.Concreate;
 using BlogScript.MvcWebUi.Models;
 using BlogScript.MvcWebUi.Services;
@@ -17,7 +18,7 @@ namespace BlogScript.MvcWebUi.Controllers
         private readonly IUserSessionService userSessionService;
         private readonly IBlogService blogService;
 
-        public BlogController(ICategoryService categoryService,IUserSessionService userSessionService,IBlogService blogService)
+        public BlogController(ICategoryService categoryService, IUserSessionService userSessionService, IBlogService blogService)
         {
             this.categoryService = categoryService;
             this.userSessionService = userSessionService;
@@ -43,19 +44,20 @@ namespace BlogScript.MvcWebUi.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = userSessionService.Get("LoginUser");
+                SessionUser user = userSessionService.Get("LoginUser");
 
-                Category category = categoryService.Get(x=>x.IsActive==true && x.id==model.Categoryid);
-                if (user!=null && category!=null)
+                Category category = categoryService.Get(x => x.IsActive == true && x.id == model.Categoryid);
+                if (user != null && category != null)
                 {
                     Blog blog = new Blog()
                     {
                         Category = category,
                         Content = model.Content,
                         Title = model.Title,
-                        User=user,
-                        Tags=model.Tags,
-                        CreateUserid=user.id
+                        Description=model.Discription,
+                        Userid = user.id,
+                        Tags = model.Tags,
+                        CreateUserid = user.id
                     };
                     blogService.Add(blog);
                     blogService.Save();
@@ -64,7 +66,7 @@ namespace BlogScript.MvcWebUi.Controllers
                 {
                     ViewBag.ErrorMassage = "Kritik Hata";
                 }
-                
+
             }
             else
             {
@@ -78,9 +80,9 @@ namespace BlogScript.MvcWebUi.Controllers
                                             Value = a.id.ToString(),
                                             Text = a.Name
                                         }).ToList(),
-                Categoryid= model.Categoryid,
-                Content= model.Content,
-                 Title= model.Title
+                Categoryid = model.Categoryid,
+                Content = model.Content,
+                Title = model.Title
             });
         }
     }

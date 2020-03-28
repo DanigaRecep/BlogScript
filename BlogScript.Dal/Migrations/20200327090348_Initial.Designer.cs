@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogScript.Dal.Migrations
 {
     [DbContext(typeof(BlogScriptDbContext))]
-    [Migration("20200320174011_CategoryAdded")]
-    partial class CategoryAdded
+    [Migration("20200327090348_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -40,13 +40,22 @@ namespace BlogScript.Dal.Migrations
                     b.Property<int>("CreateUserid")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Privacy")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateDate")
@@ -141,6 +150,8 @@ namespace BlogScript.Dal.Migrations
 
                     b.HasIndex("Blogid");
 
+                    b.HasIndex("Userid");
+
                     b.ToTable("Comments");
                 });
 
@@ -195,7 +206,7 @@ namespace BlogScript.Dal.Migrations
             modelBuilder.Entity("BlogScript.Entities.Concreate.Blog", b =>
                 {
                     b.HasOne("BlogScript.Entities.Concreate.Category", "Category")
-                        .WithMany()
+                        .WithMany("Blogs")
                         .HasForeignKey("Categoryid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -214,6 +225,10 @@ namespace BlogScript.Dal.Migrations
                         .HasForeignKey("Blogid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BlogScript.Entities.Concreate.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("Userid");
                 });
 #pragma warning restore 612, 618
         }

@@ -63,7 +63,7 @@ namespace BlogScript.Pages
         /// </summary>
         [BindProperty]
         public string ImageFolder { get; set; } = "";
-
+         
         /// <summary>
         /// The URL to the root image folder.
         /// </summary>

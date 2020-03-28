@@ -21,6 +21,10 @@ namespace BlogScript.MvcWebUi.Models
         [Display(Name = "Kategori")]
         [Required]
         public int Categoryid { get; set; }
+
+        [Display(Name = "Kısa Özet")]
+        [Required]
+        public string Discription { get; set; }
         public List<SelectListItem> Categories { get; set; }
     }
 }

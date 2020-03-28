@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlogScript.MvcWebUi.ExtensionMethods;
 using BlogScript.Entities.Concreate;
+using BlogScript.Bll.Concreate;
 
 namespace BlogScript.MvcWebUi.Services
 {
@@ -18,12 +19,12 @@ namespace BlogScript.MvcWebUi.Services
         }
 
 
-        public User Get(string key)
+        public SessionUser Get(string key)
         {
-            return httpContextAccessor.HttpContext.Session.GetObj<User>(key);
+            return httpContextAccessor.HttpContext.Session.GetObj<SessionUser>(key);
         }
 
-        public void Set(User value, string key)
+        public void Set(SessionUser value, string key)
         {
             httpContextAccessor.HttpContext.Session.SetObj(key, value);
         }

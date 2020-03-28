@@ -19,6 +19,8 @@ namespace BlogScript.Entities.Abstract
         string Tags { get; set; }
 
         string Content { get; set; }
+        string Description { get; set; }
+
 
         ICollection<Comment> Comments { get; set; }
     }

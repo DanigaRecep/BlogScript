@@ -9,9 +9,10 @@ namespace BlogScript.Entities.Concreate
     public class Comment:EntityBase,IComment
     {
         public int? Userid { get; set; }
+        public virtual User User { get; set; }
 
         public int Blogid { get; set; }
-        public Blog Blog { get; set; }
+        public virtual Blog Blog { get; set; }
 
 
         public int Points { get; set; }

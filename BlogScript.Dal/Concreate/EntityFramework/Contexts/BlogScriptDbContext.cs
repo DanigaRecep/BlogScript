@@ -8,9 +8,15 @@ namespace BlogScript.Dal.Concreate.EntityFramework.Contexts
 {
     public class BlogScriptDbContext : DbContext
     {
+
+        /*
+            install-package Microsoft.EntityFrameworkCore.Proxies 
+            install-package Microsoft.EntityFrameworkCore.Abstractions
+        */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=DANIGA-PC\SQLEXPRESS;Initial Catalog=BlogScript;Integrated Security=True");
+            optionsBuilder.UseLazyLoadingProxies();
             base.OnConfiguring(optionsBuilder);
         }
 

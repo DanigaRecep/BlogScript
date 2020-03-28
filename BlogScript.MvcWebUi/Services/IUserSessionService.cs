@@ -1,4 +1,5 @@
-﻿using BlogScript.Entities.Concreate;
+﻿using BlogScript.Bll.Concreate;
+using BlogScript.Entities.Concreate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace BlogScript.MvcWebUi.Services
 {
     public interface IUserSessionService
     {
-        User Get(string key);
-        void Set(User value, string key);
+        SessionUser Get(string key);
+        void Set(SessionUser value, string key);
     }
 }

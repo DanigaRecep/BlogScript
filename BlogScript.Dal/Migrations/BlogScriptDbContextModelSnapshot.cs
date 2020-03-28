@@ -15,7 +15,7 @@ namespace BlogScript.Dal.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -37,6 +37,9 @@ namespace BlogScript.Dal.Migrations
 
                     b.Property<int>("CreateUserid")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -145,6 +148,8 @@ namespace BlogScript.Dal.Migrations
 
                     b.HasIndex("Blogid");
 
+                    b.HasIndex("Userid");
+
                     b.ToTable("Comments");
                 });
 
@@ -199,7 +204,7 @@ namespace BlogScript.Dal.Migrations
             modelBuilder.Entity("BlogScript.Entities.Concreate.Blog", b =>
                 {
                     b.HasOne("BlogScript.Entities.Concreate.Category", "Category")
-                        .WithMany()
+                        .WithMany("Blogs")
                         .HasForeignKey("Categoryid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -218,6 +223,10 @@ namespace BlogScript.Dal.Migrations
                         .HasForeignKey("Blogid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BlogScript.Entities.Concreate.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("Userid");
                 });
 #pragma warning restore 612, 618
         }

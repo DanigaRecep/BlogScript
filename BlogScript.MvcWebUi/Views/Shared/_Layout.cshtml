@@ -20,7 +20,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blog Script</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -44,7 +44,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="margin-top:65px">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -58,7 +58,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
     <script>
         CKEDITOR.plugins.addExternal('SelectTemplate', 'lib/CKEditor/', 'plugin.js');
@@ -66,7 +65,7 @@
         const config = {
             filebrowserImageBrowseUrl: "/ImageBrowser",
             filebrowserImageWindowWidth: 750,
-            filebrowserImageWindowHeight: 606,
+            filebrowserImageWindowHeight: 700,
             filebrowserBrowseUrl: "/LinkBrowser",
             filebrowserWindowWidth: 350,
             filebrowserWindowHeight: 500,
@@ -74,7 +73,7 @@
             extraPlugins: 'font',
             allowedContent: 'ul li i(ion-android-checkmark-circle)'
         };
-        config.contentsCss = ['/NewLayout/css/style.css',];
+        config.contentsCss = ['/css/site.css',];
         config.allowedContent = true;
         config.extraAllowedContent = 'i(*)';
         config.removeFormatAttributes = '';
