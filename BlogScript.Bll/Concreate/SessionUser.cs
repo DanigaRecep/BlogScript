@@ -8,10 +8,6 @@ namespace BlogScript.Bll.Concreate
 {
     public class SessionUser : EntityBase
     {
-        public void Fill(SessionUser session,User user)
-        {
-            user.UserToSession(ref session);
-        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

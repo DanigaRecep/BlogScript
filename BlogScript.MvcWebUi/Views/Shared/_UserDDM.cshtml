@@ -18,8 +18,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 @if (LoginUser != null)
                 {
-                    <a class="dropdown-item" asp-area="" asp-controller="UserDetail" asp-action="Account">Hesabım</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">Bloglarım</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="UserDetail" asp-action="BlogList">Hesabım</a>
                     <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">Çıkış Yap</a>
                 }
                 else

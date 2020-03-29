@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BlogScript.Bll.Abstract;
 using BlogScript.Bll.Concreate;
 using BlogScript.Entities.Concreate;
+using BlogScript.MvcWebUi.Attributes;
 using BlogScript.MvcWebUi.Models;
 using BlogScript.MvcWebUi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace BlogScript.MvcWebUi.Controllers
             this.userSessionService = userSessionService;
             this.blogService = blogService;
         }
+        [UserAuthorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -38,7 +40,7 @@ namespace BlogScript.MvcWebUi.Controllers
             });
         }
 
-
+        [UserAuthorize]
         [HttpPost]
         public IActionResult Create(BlogCreateViewModel model)
         {
@@ -85,5 +87,20 @@ namespace BlogScript.MvcWebUi.Controllers
                 Title = model.Title
             });
         }
+
+        [HttpGet]
+        public IActionResult BlogDetail(int id)
+        {
+            Blog blog = blogService.Get(x => x.id == id && x.IsActive);
+            return View(blog);
+        }
+
+        [HttpGet]
+        public JsonResult Increment()
+        {
+
+            return Json("Merhaba");
+        }
+
     }
 }

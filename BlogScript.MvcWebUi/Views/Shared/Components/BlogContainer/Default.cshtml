@@ -1,0 +1,16 @@
+﻿@model Blog
+
+
+<div class=" jumbotron pt-3 pb-3">
+    @{
+        <a asp-area="" asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@Model.id"><h2>@Model.Title</h2></a>
+        <hr />
+        <p class="mt-4 mb-4">@Model.Description</p>
+        <hr />
+        <small class="d-block">@Model.User.UserName</small>
+        <small class="d-block">@Model.CreateDate.ToLongDateString()</small>
+    }
+</div>
+
+
+

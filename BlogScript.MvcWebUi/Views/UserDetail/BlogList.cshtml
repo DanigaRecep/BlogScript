@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "../Shared/_UserDetailLayout";
+}
+@inject IBlogService blogService
+@inject IUserSessionService sessionService
+@{ 
+    int SessionUserId = sessionService.Get("LoginUser").id;
+}
+
+    <div class="container pt-3">
+            @foreach (var item in blogService.GetMany(x => x.IsActive == true && x.Privacy == true && x.User.id == SessionUserId))
+            {
+                @await Component.InvokeAsync("BlogContainer", new { blog = item })
+            }
+    </div>
+

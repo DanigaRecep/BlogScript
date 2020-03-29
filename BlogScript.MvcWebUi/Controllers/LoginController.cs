@@ -22,7 +22,7 @@ namespace BlogScript.MvcWebUi.Controllers
         private readonly IUserSessionService userSessionService;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public LoginController(IUserService userService, IUserSessionService userSessionService,IHostingEnvironment hostingEnvironment)
+        public LoginController(IUserService userService, IUserSessionService userSessionService, IHostingEnvironment hostingEnvironment)
         {
             this.userService = userService;
             this.userSessionService = userSessionService;
@@ -116,9 +116,9 @@ namespace BlogScript.MvcWebUi.Controllers
         public IActionResult Logout()
         {
             SessionUser user = userSessionService.Get("LoginUser");
-            if (user!=null)
-                userSessionService.Set(null,"LoginUser");
-            return RedirectToAction("Index","Home",new { area=""});
+            if (user != null)
+                userSessionService.Set(null, "LoginUser");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

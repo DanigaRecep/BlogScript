@@ -7,16 +7,5 @@
 
 @foreach (var item in blogService.GetMany(x => x.IsActive == true && x.Privacy == true))
 {
-    <h3>@item.Title</h3>
-    <p>@item.Description</p>
-    @Html.Raw(item.Content)
-    string[] tags = item.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries);
-    <h1>@item.User?.FirstName</h1>
-    <div class="row">
-        @foreach (var tag in tags)
-        {
-            <p class="border border-success m-1 bg-success text-light rounded pl-1 pr-1 font-weight-bold">@tag.ToUpper()</p>
-        }
-    </div>
-    <hr />
+    @await Component.InvokeAsync("BlogContainer", new { blog = item })
 }
