@@ -11,4 +11,6 @@ namespace BlogScript.Dal.Concreate.EntityFramework
     public class EfCommentDal : EfEntityRepositoryBase<Comment, BlogScriptDbContext>, ICommentDal { }
     public class EfCategoryDal : EfEntityRepositoryBase<Category, BlogScriptDbContext>, ICategoryDal { }
     public class EfBlogDal : EfEntityRepositoryBase<Blog, BlogScriptDbContext>, IBlogDal { }
+    public class EfLikeDal : EfEntityRepositoryBase<Like, BlogScriptDbContext>, ILikeDal { }
+
 }

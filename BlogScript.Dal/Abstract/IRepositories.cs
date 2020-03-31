@@ -10,4 +10,5 @@ namespace BlogScript.Dal.Abstract
     public interface ICategoryDal : IEntityRepository<Category> { };   
     public interface ICommentDal : IEntityRepository<Comment> { };
     public interface IBlogDal : IEntityRepository<Blog> { };
+    public interface ILikeDal : IEntityRepository<Like> { };
 }

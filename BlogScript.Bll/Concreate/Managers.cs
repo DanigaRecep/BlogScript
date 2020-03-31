@@ -10,6 +10,7 @@ namespace BlogScript.Bll.Concreate
 {
     public class UserManager : EntityManager<User>, IUserService { public UserManager(IUserDal repostory) : base(repostory) { } }
     public class CategoryManager : EntityManager<Category>, ICategoryService { public CategoryManager(ICategoryDal repostory) : base(repostory) { } }
+    public class LikeManager : EntityManager<Like>, ILikeService { public LikeManager(ILikeDal repostory) : base(repostory) { } }
     public class CommentManager : EntityManager<Comment>, ICommentService { public CommentManager(ICommentDal repostory) : base(repostory) { } }
     public class BlogManager : EntityManager<Blog>, IBlogService
     {
@@ -28,9 +29,9 @@ namespace BlogScript.Bll.Concreate
             return GetMany(x => x.IsActive == true);
         }
 
-        public void PointIncrementation(Blog blog)
+        public void PointIncrementation(Blog blog,int value)
         {
-            blog.Points++;
+            blog.Points+=value;
             Update(blog);
             Save();
         }

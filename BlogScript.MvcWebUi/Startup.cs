@@ -33,20 +33,21 @@ namespace BlogScript.MvcWebUi
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IUserDal, EfUserDal>();
 
-
             services.AddScoped<ICommentService, CommentManager>();
             services.AddScoped<ICommentDal, EfCommentDal>();
-
 
             services.AddScoped<IBlogService, BlogManager>();
             services.AddScoped<IBlogDal, EfBlogDal>();
 
-
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
 
+            services.AddScoped<ILikeService, LikeManager>();
+            services.AddScoped<ILikeDal, EfLikeDal>();
 
             services.AddSingleton<IUserSessionService, UserSessionService>();
+
+            services.AddSingleton<IBlogViewCounterCookieService, BlogViewCounterCookieService>();
 
             services.AddSingleton<IUserCookieService, UserCookieService>();
 

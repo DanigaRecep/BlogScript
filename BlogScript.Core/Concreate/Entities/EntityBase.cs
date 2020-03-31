@@ -14,5 +14,7 @@ namespace BlogScript.Core.Concreate.Entities
 		public int? UpdateUserid { get; set; }
 		public bool IsActive { get; set; } = true;
 
+		public static bool IsNotNull(EntityBase entity) => entity != null;
+
 	}
 }

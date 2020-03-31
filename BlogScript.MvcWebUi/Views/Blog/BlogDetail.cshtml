@@ -1,6 +1,7 @@
 ﻿@model Blog
 
 @{
+    int Id = Model.id;
     string[] tags = Model.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries);
 }
 
@@ -20,9 +21,9 @@
 
     <div class="d-flex flex-row justify-content-end ">
         <p class="text-secondary font-weight-bold"><i class="fas fa-eye"></i> @Model.ViewCount</p>
-        <p class="text-secondary font-weight-bold  ml-2  mr-2">Puan: @Model.Points</p>
-        <a class="text-secondary" asp-area="" asp-controller="Blog" asp-action="Increment" ><i class="fas fa-plus mr-1"></i><i class="fas fa-plus"></i></a>
-        <a class="text-secondary ml-3 mr-3" href="#"><i class="fas fa-minus mr-1"></i><i class="fas fa-minus"></i></a>
+        <p class="text-secondary font-weight-bold  ml-2  mr-2">Puan: <span id="Point">@Model.Points</span></p>
+        <a id="BtnIncrement" class="Cursorpointer text-secondary"><i class="fas fa-plus mr-1"></i><i class="fas fa-plus"></i></a>
+        <a id="BtnDecrease" class="Cursorpointer text-secondary ml-3 mr-3"><i class="fas fa-minus mr-1"></i><i class="fas fa-minus"></i></a>
         <a class="text-secondary" href="#"><i class="fas fa-bookmark"></i></a>
     </div>
     <div class="row"><h5>Etiketler:</h5></div>
@@ -32,7 +33,7 @@
             <p class="border border-secondary m-1 bg-secondary text-light pl-2 pr-2 " style="border-radius:20px;font-size:12px">@tag.ToUpper()</p>
         }
     </div>
-    <div class="row jumbotron jumbotron-fluid pt-3 pb-3 mt-3" >
+    <div class="row jumbotron jumbotron-fluid pt-3 pb-3 mt-3">
         <img class="img-fluid col-2" src="~/UserImages/@Model.User.ProfilePhoto" asp-append-version="true" alt="@Model.User.UserName" />
         <div class="d-flex flex-column justify-content-center col-10">
             <h5>@Model.User.FirstName @Model.User.LastName</h5>
@@ -45,23 +46,38 @@
     </div>
 }
 
-@*$("#postSelected").click(function (e) {
-        var selectedData = table.getSelectedData();
-        var jsonSelectedEmails = JSON.stringify(selectedData);
-        $.ajax({
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            url: "/Admin/Home/BilgilendirmeEmails",
-            data: {
-                json:jsonSelectedEmails
-            },
-            success: function() {
-                toastr.success("Basarili")
-            },
-            error: function() {
-                toastr.error("Silindi")
-            }
+@section Scripts{
+    <script>
+        $("#Point").css("color", "@ViewBag.PointColor");
+        $("#BtnIncrement").click(function (e) {
+            Increment(1);
         });
-    });*@
+        $("#BtnDecrease").click(function (e) {
+            Increment(-1);
+        });
+         function Increment(val) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                url: "@Url.Action("Increment","Blog")",
+                data: {
+                    id:@Id,
+                    value: val
+                },
+                success: function (response) {
+                    console.log(response);
+                    $("#Point").html(`${response.point}`);
+                    $("#Point").css("color", response.color);
+                },
+                error: function () {
+                    alert("Hata");
+                }
+            });
+        }
+
+
+    </script>
+}
+
 
